@@ -20,6 +20,7 @@ const reviewSchema = new mongoose.Schema({
   name: String,
   description: String,
   date: { type: Date, default: Date.now }
+
 });
 
 const Review = mongoose.model("Review", reviewSchema);
