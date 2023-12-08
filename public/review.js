@@ -20,7 +20,7 @@ const showReviews = async () => {
         section.append(a);
 
         const h3 = document.createElement("h3");
-        h3.innerHTML = workout.name;
+        h3.innerHTML = review.name;
         a.append(h3);
 
         a.onclick = (e) => {
@@ -64,7 +64,7 @@ const displayDetails = (review) => {
     eLink.onclick = (e) => {
         e.preventDefault();
         document.querySelector(".dialog").classList.remove("transparent");
-        document.getElementById("add-edit-title").innerHTML = "Edit Workout";
+        document.getElementById("add-edit-title").innerHTML = "Edit Review";
     };
 
     dLink.onclick = (e) => {
