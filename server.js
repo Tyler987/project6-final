@@ -19,7 +19,6 @@ mongoose
 const reviewSchema = new mongoose.Schema({
   name: String,
   description: String,
-  date: { type: Date, default: Date.now }
 
 });
 
@@ -62,7 +61,7 @@ app.get("/api/reviews", (req, res) => {
 });
 
 const getLatestReview = async (res) => {
-  const review = await Review.findOne().sort({ date: -1 });
+//   const review = await Review.findOne().sort({ date: -1 });
   res.send(review);
 };
 
