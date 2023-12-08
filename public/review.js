@@ -34,6 +34,48 @@ const showReviews = async () => {
         };
     });
 };
+const addEditReview = async(e) => {
+    e.preventDefault();
+    const form = document.getElementById("add-edit-review-form");
+    const formData = new FormData(form);
+    // formData.delete("img");
+    let response;
+
+    formData.append("complaints", getComplaints());
+    // let response;
+    if (form._id.value == -1) {
+        formData.delete("_id");
+
+        response = await fetch("/api/reviews", {
+            method: "POST",
+            body: formData
+        });
+    }
+    else {
+
+        console.log(...formData);
+
+        response = await fetch(`/api/reviews/${form._id.value}`, {
+            method: "PUT",
+            body: formData
+        });
+    }
+
+    if (response.status != 200) {
+        console.log("Error posting data");
+        return;
+    }
+
+    review = await response.json();
+
+    if (form._id.value != -1) {
+        displayDetails(review);
+    }
+
+    document.querySelector(".dialog").classList.add("transparent");
+    resetForm();
+    showReviews();
+};
 
 const displayDetails = (review) => {
     const reviewDetails = document.getElementById("review-details");
@@ -107,7 +149,12 @@ const resetForm = (form) => {
 
 window.onload = () => {
     showReviews();
+    document.getElementById("add-edit-review-form").onsubmit = addEditReview;
+    document.getElementById("add-link").onclick = showHideAdd;
 
-    const addReviewForm = document.getElementById("add-review-form");
-    addReviewForm.addEventListener("submit", addReview);
+    document.querySelector(".close").onclick = () => {
+        document.querySelector(".dialog").classList.add("transparent");
+    };
+
+    document.getElementById("add-complaint").onclick = addComplaint;
 };
