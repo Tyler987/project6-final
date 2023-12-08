@@ -12,10 +12,10 @@ const showReviews = async () => {
     reviewsDiv.innerHTML = "";
 
     // Check if reviews is an array
-    if (!Array.isArray(reviews)) {
-        console.error("Invalid response from server:", reviews);
-        return;
-    }
+    // if (!Array.isArray(reviews)) {
+    //     console.error("Invalid response from server:", reviews);
+    //     return;
+    // }
 
     reviews.forEach((review) => {
         const section = document.createElement("section");
