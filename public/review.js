@@ -178,7 +178,7 @@ const showHideAdd = (e) => {
     resetForm();
 };
 
-const addReview = (e) => {
+const addComplaint = (e) => {
     // e.preventDefault();
     // const exerciseBoxes = document.getElementById("exercise-boxes");
     // const input = document.createElement("input");
