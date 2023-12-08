@@ -76,7 +76,7 @@ app.post("/api/reviews", (req, res) => {
 
   const review = new Review({
     name: req.body.name,
-    description: req.body.description
+    description: req.body.description,
   });
 
   createReview(res, review);
