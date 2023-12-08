@@ -60,10 +60,10 @@ app.get("/api/reviews", (req, res) => {
   getLatestReview(res);
 });
 
-const getLatestReview = async (res) => {
-//   const review = await Review.findOne().sort({ date: -1 });
-  res.send(review);
-};
+// const getLatestReview = async (res) => {
+// //   const review = await Review.findOne().sort({ date: -1 });
+//   res.send(review);
+// };
 
 app.post("/api/reviews", (req, res) => {
   const result = validateReview(req.body);
