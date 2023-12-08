@@ -56,53 +56,87 @@ app.get("/trainers", (req, res) => {
 app.get("/training", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "training.html"));
 });
-
-app.get("/api/reviews", (req, res) => {
-  getLatestReview(res);
-});
-
-const getLatestReview = async (res) => {
-  const review = await Review.findOne().sort({ date: -1 });
-  res.send(review);
+app.get("/api/Reviews", (req, res) => {
+    getReviews(res);
+  });
+const getReviews = async (res, id) => {
+    // const workout = Workout.findOne({_id: id });
+    const reviews = await Review.find();
+    res.send(reviews);
 };
 
-app.post("/api/reviews", upload.single("img"), (req, res) => {
-  const result = validateReview(req.body);
+app.post("/api/Reviews", upload.single("img"), (req, res) => {
+    const result = validateReview(req.body);
 
-  if (result.error) {
-    res.status(400).send(result.error.details[0].message);
-    return;
-  }
+    if (result.error) {
+        res.status(400).send(result.error.details[0].message);
+        return;
+    }
 
-  const review = new Review({
-    name: req.body.name,
-    description: req.body.description,
-    complaints: req.body.complaints.split(","),
-  });
-
-  if (req.file) {
-    review.img = "images/" + req.file.filename;
-  }
-
-  createReview(res, review);
-});
-
+    const review = new Review({
+        name: req.body.name,
+        description: req.body.description,
+        complaints: req.body.complaints.split(","),
+      });
+    
+      if (req.file) {
+        review.img = "images/" + req.file.filename;
+      }
+    
+      createReview(res, review);
+    });
 const createReview = async (res, review) => {
-  await Review.deleteMany(); // Remove all existing reviews
-  const result = await review.save();
-  res.send(review);
+    const result = await review.save();
+    res.send(review);
 };
 
-const validateReview = (review) => {
-  const schema = Joi.object({
-    name: Joi.string().min(3).required(),
-    description: Joi.string().min(3).required(),
-    complaints: Joi.allow(""),
-  });
+app.put("/api/reviews/:id", upload.single("img"), (req, res) => {
+        const result = validateReview(req.body);
+      
+        if (result.error) {
+          res.status(400).send(result.error.details[0].message);
+          return;
+        }
+      
+        updateReview(req, res);
+      });
 
-  return schema.validate(review);
-};
-
-app.listen(3000, () => {
-  console.log("I'm listening");
-});
+      const updateReview = async (req, res) => {
+        let fieldsToUpdate = {
+          name: req.body.name,
+          description: req.body.description,
+          complaints: req.body.complaints.split(","),
+        };
+      
+        if (req.file) {
+          fieldsToUpdate.img = "images/" + req.file.filename;
+        }
+      
+        const result = await Review.updateOne({ _id: req.params.id }, fieldsToUpdate);
+        const review = await Review.findById(req.params.id);
+        res.send(review);
+      };
+      
+      app.delete("/api/reviews/:id", upload.single("img"), (req, res) => {
+        removeReview(res, req.params.id);
+      });
+      
+      const removeReview = async (res, id) => {
+        const review = await Review.findByIdAndDelete(id);
+        res.send(review);
+      };
+      
+      const validateReview = (review) => {
+        const schema = Joi.object({
+          _id: Joi.allow(""),
+          complaints: Joi.allow(""),
+          name: Joi.string().min(3).required(),
+          description: Joi.string().min(3).required(),
+        });
+      
+        return schema.validate(review);
+      };
+      
+      app.listen(3000, () => {
+        console.log("I'm listening");
+      });
