@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const Joi = require("joi");
 const multer = require("multer");
-const path = require("path"); // Added the path module
+const path = require("path");
 app.use(express.static("public"));
 app.use(express.json());
 const cors = require("cors");
@@ -12,14 +12,15 @@ const mongoose = require("mongoose");
 const upload = multer({ dest: __dirname + "/public/images" });
 
 mongoose
-  .connect("mongodb+srv://tylerkorth12:Harpswell0!@tyler.mfrtbgb.mongodb.net/")
+  .connect("mongodb+srv://your_username:your_password@your_cluster.mongodb.net/")
   .then(() => console.log("Connected to mongodb..."))
-  .catch((err) => console.error("could not connect ot mongodb...", err));
+  .catch((err) => console.error("Could not connect to mongodb...", err));
 
 const reviewSchema = new mongoose.Schema({
   name: String,
   description: String,
-
+  complaints: [String],
+  img: String,
 });
 
 const Review = mongoose.model("Review", reviewSchema);
@@ -60,12 +61,12 @@ app.get("/api/reviews", (req, res) => {
   getLatestReview(res);
 });
 
-// const getLatestReview = async (res) => {
-// //   const review = await Review.findOne().sort({ date: -1 });
-//   res.send(review);
-// };
+const getLatestReview = async (res) => {
+  const review = await Review.findOne().sort({ date: -1 });
+  res.send(review);
+};
 
-app.post("/api/reviews", (req, res) => {
+app.post("/api/reviews", upload.single("img"), (req, res) => {
   const result = validateReview(req.body);
 
   if (result.error) {
@@ -76,7 +77,12 @@ app.post("/api/reviews", (req, res) => {
   const review = new Review({
     name: req.body.name,
     description: req.body.description,
+    complaints: req.body.complaints.split(","),
   });
+
+  if (req.file) {
+    review.img = "images/" + req.file.filename;
+  }
 
   createReview(res, review);
 });
@@ -91,6 +97,7 @@ const validateReview = (review) => {
   const schema = Joi.object({
     name: Joi.string().min(3).required(),
     description: Joi.string().min(3).required(),
+    complaints: Joi.allow(""),
   });
 
   return schema.validate(review);

@@ -59,14 +59,21 @@
     </header>
 
     <content>
-        <h1>Add a review</h1>
-
-        <div id="review-list"></div>
-        <div id="review-details"></div>
-
-        <div class="dialog transparent">
-            <h3 id="add-edit-title">Add Review</h3>
-            <form id="add-review-form" method="post">
+        <div class="columns two-columns">
+            <div id="review-list" class="columns"></div>
+            <div id="review-details-column">
+                <h2>Details</h2>
+        
+                <div id="review-details"></div>
+            </div>
+        </div>
+        
+        <div id="add-edit-review-container" class="dialog transparent">
+            <span class="close">&times;</span>
+        
+            <h3 id="add-edit-title">Review</h3>
+            <form id="add-edit-review-form" method="post">
+                <input type="hidden" name="_id" value="-1" />
                 <p>
                     <label for="name">Review Name:</label>
                     <input type="text" id="name" name="name" required />
