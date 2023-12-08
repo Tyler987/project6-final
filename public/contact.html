@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Final Project 6</title>
+    <link rel="stylesheet" href="contact.css">
+    <script defer src="contact.js"></script>
+</head>
+
+<body>
+    <header id="main-header" class="padded-area">
+        <div class="ihead">
+            <div class="logo-head">
+                <a href="index.html"> <img src="images/vaultlogo.jpg" id="vault"> </a>
+            </div>
+    
+            <div class="title">
+                <a href="index.html">  <h1 >The Vault</h1></a>
+            </div>
+    
+            <div class="info">
+                <div class="name1">
+                <h3>By Tyler Korth</h3>
+                </div>
+
+                <div class="name3">
+                <h3>CSCE Web Applications</h3>  
+                </div>
+            </div>
+        </div>
+        <div class="wrap">
+          <div class="navbar">
+              <a href="home.html">Home</a>
+              <div class="dropdown">
+                <button class="dropbtn">Health and Fitness
+                </button>
+                <div class="dropdown-content">
+                    <a href="training.html">Training</a>
+                    <a href="trainers.html">Meet our Trainers</a>
+                    <a href="classes.html">Group Classes</a>
+                </div>
+            </div>
+            <div class="dropdown">
+              <button class="dropbtn">About
+              </button>
+              <div class="dropdown-content">
+                  <a href="membership.html">Membership</a>
+                  <a href="qa.html">Q&A</a>
+              </div>
+          </div>
+              <a href="contact.html">Contact</a>
+              <a href="review.html">Review</a>
+  
+  
+  
+          </div>
+      </div>
+    </header>
+
+    <content>
+        <div>
+            <div class="contact-header">
+                <h1>Do you have any questions? Ask Below!</h1>
+            </div>
+            <div class="contact-box">
+    
+                <div id="concern-info">
+                    <content>
+    
+    
+                        <form
+                          id="contact-form"
+                          action="https://api.web3forms.com/submit"
+                          method="POST"
+                        >
+                          <input
+                            type="hidden"
+                            name="access_key"
+                            value="0a7427f5-0a51-4b26-9739-a9b66beb6aa9"
+                          />
+                
+                          <p>
+                            <label for="name">Name:</label>
+                            <input
+                              id="name"
+                              type="text"
+                              placeholder="first and last"
+                              name="name"
+                              required
+                            />
+                          </p>
+                          <p>
+                            <label for="email">Email:</label>
+                            <input id="email" type="email" name="email" required />
+                          </p>
+                          <p>
+                            <label for="message">Message:</label>
+                            <textarea id="message" name="message" required></textarea>
+                          </p>
+                          <input
+                            type="hidden"
+                            name="redirect"
+                            value="https://web3forms.com/success"
+                          />
+                          <input
+                            type="hidden"
+                            name="subject"
+                            value="Tylers Site"
+                          />
+                          <input type="hidden" name="from_name" value="My Website" />
+                
+                          <p>
+                            <button type="submit">Submit Form</button>
+                          </p>
+                
+                          
+                        </form>
+                
+                
+                
+                    </content>
+                </div>
+            <div>
+                <p id="result"></p>        </div>
+            </div>
+        </div>
+    </content>
+
+    <footer>
+      <div class="logo-footer">
+          <a href="index.html"> <img src="images/vaultlogo.jpg" id="vault"> </a>
+      </div>
+     
+      <div class="contact">
+          <h3>
+          The Vault | 1626 Vault Dr. Columbia, SC 29206 | ***-***-****
+          </h3>
+      </div>
+  </footer>
+</body>
+
+</html>
