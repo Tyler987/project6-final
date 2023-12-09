@@ -22,8 +22,7 @@ table {
 th, td {
   border: 1px solid #dddddd;
   text-align: left;
-  padding: 12px;
-
+padding:12px;
 }
 
 th {
@@ -309,7 +308,7 @@ tbody tr {
     margin-top:8%;
   }
   
-  .ihead {
+  /* .ihead {
   
     background-color: #333;
   
@@ -321,7 +320,7 @@ tbody tr {
       width: 100%;
       height: 120px;
   
-  }
+  } */
   
   footer {
     background-color: #333;
@@ -344,3 +343,93 @@ tbody tr {
     flex:1;
   
   }
+  
+.ihead {
+  background-color: #333;
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  width: 100%;
+  height: 120px;
+  /* padding: 0 20px; Add padding as needed */
+}
+
+/* Additional styling for each item if needed */
+.logo-head,
+.title,
+.info {
+  flex-grow: 1;
+}
+
+.logo-head img {
+  max-width: 100%; /* Ensure the logo image doesn't exceed its container */
+}
+
+.title {
+  margin-left: 20px; /* Adjust the margin as needed */
+}
+
+.info {
+  margin-right: 20px; /* Adjust the margin as needed */
+}
+/* Media Queries for smaller screens */
+@media only screen and (max-width: 600px) {
+  .ihead {
+    flex-direction: column;
+    height:350px;
+  }
+  .wrap {
+    flex-direction: column; /* Stack items vertically on smaller screens */
+  }
+
+  /* .navbar .dropdown:hover .dropdown-content {
+    display: none;  Hide dropdown content on hover for small screens 
+  } */
+
+  .parallax1,
+  .parallax2 {
+    min-height: 300px; /* Adjust the height of parallax sections for smaller screens */
+  }
+
+  .welcome {
+    top: 550px; /* Adjust the position of the welcome text on smaller screens */
+    font-size: 10px;
+  }
+
+  .box {
+    width: 100%; /* Make boxes take full width on smaller screens */
+  }
+
+  form input,
+  form textarea,
+  form button,
+  select {
+    width: 100%; /* Make form elements take full width on smaller screens */
+  }
+
+  footer {
+    flex-direction: column; /* Stack footer items vertically on smaller screens */
+    height:200px;
+  }
+  
+  .info,
+  .info h3 {
+    text-align: center; /* Center align the info section text on smaller screens */
+  }
+
+  .logo-head,
+  .title,
+  .info,
+  .info h3 {
+    margin: 10px 0; /* Add margin for better spacing on smaller screens */
+  }
+  h3 {
+    margin:8px;
+    padding:0;
+    
+  }
+  label {
+    margin-top:36px;
+    margin-bottom:36px;
+  }
+}
