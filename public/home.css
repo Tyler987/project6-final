@@ -50,7 +50,7 @@ body {
   display: flex;
   justify-content: center; */
   display:flex;
-  background-color: #333;
+  background-color: black;
   height: 45px;
   justify-content: center; /* Center the items horizontally */
   align-items: center; /* Center the items vertically */
